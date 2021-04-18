@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>编辑</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}">
+	</head>
+	<body>
+		<div class="container">
+		<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h1>编辑</h1>
+			<br/>
+			<a th:href="@{/books}">返回首页</a>
+			<br/><br/>
+			<form th:action="${add}?@{/books/edit/add}:@{/books/{bookId}/edit(bookId=${book.id})}" th:object="${book}" method="POST">
+				<table class="table" border="0">
+		                <tr th:if="*{id}">
+		                    <td class="control-label">编号</td>
+		                    <td>：</td>
+							<td th:text="*{id}">
+		                </tr>
+		                <tr>
+		                    <td class="control-label">书名</td>
+		                    <td>：</td>
+		                    <td><input type="text" class="form-control" th:field="*{title}">
+								<p class="error-message" th:each="error : ${#fields.errors('title')}" th:text="${error}">ror</p>
+							</td>              
+		                </tr>
+		                <tr>
+		                    <td class="control-label">作者</td>
+		                    <td>：</td>
+		                    <td><input type="text" class="form-control" th:field="*{author}"></td>              
+		                </tr>
+		                <tr>
+		                    <td class="control-label">售价</td>
+		                    <td>：</td>
+		                    <td><input type="text" class="form-control" th:field="*{money}"></td>              
+		                </tr>
+		                <tr>
+		                    <td class="control-label">库存</td>
+		                    <td>：</td>
+		                    <td><input type="text" class="form-control" th:field="*{stock}"></td>              
+		                </tr>
+						<tr>
+		                    <td class="control-label">封面链接</td>
+		                    <td>：</td>
+		                    <td><input type="text" class="form-control" th:field="*{cover}"></td>              
+		                </tr>
+		                <tr>
+		                    <td class="control-label">内容简介</td>
+		                    <td>：</td>
+		                    <td><textarea th:field="*{intro}"class="form-control" rows="4" cols="50"></textarea></td>
+		                </tr>
+		        </table>
+				<hr/>
+				<input type="submit" class="btn btn-success" th:value="完成">
+			</form>
+		</div>
+		</div>
+		</div>
+	</body>
+</html>

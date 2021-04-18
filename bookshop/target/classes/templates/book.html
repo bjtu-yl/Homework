@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${book.title}"></title>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}">
+    </head>
+    <body>
+		<div class="container">
+		<div class="row">
+		<div class="col-md-3">
+		<br/><br/>
+			<img th:src="@{${book.cover}}">
+		</div>
+		<div class="col-md-6">
+	        <h1>图书信息</h1>
+	        <br/>
+			<a th:href="@{/books}">返回首页</a>
+			<br/><br/>
+	        <div th:object="${book}">
+	            <table class="table" border="0">
+	                <tr>
+	                    <td class="control-label">编号</td>
+	                    <td>：</td>
+						<td th:text="*{id}">
+	                </tr>
+	                <tr>
+	                    <td class="control-label">书名</td>
+	                    <td>：</td>
+	                    <td th:text="*{title}">           
+	                </tr>
+	                <tr>
+	                    <td class="control-label">作者</td>
+	                    <td>：</td>
+	                    <td th:text="*{author}">          
+	                </tr>
+	                <tr>
+	                    <td class="control-label">售价</td>
+	                    <td>：</td>
+	                    <td th:text="*{money}">        
+	                </tr>
+	                <tr>
+	                    <td class="control-label">库存</td>
+	                    <td>：</td>
+	                    <td th:text="*{stock}">         
+	                </tr>
+	                <tr>
+	                    <td class="control-label">简介</td>
+	                    <td>：</td>
+	                    <td th:text="*{intro}">
+	                </tr>
+	        	</table>
+				<hr/>
+				<br/>
+				<div th:if="not ${allowDelete}">
+					<a th:href="@{/books/{bookId}/edit(bookId=${book.id})}">修改图书信息</a> |
+                	<a th:href="@{/books/{bookId}/delete(bookId=${book.id})}">删除当前图书</a>
+            	</div>
+            	<form th:if="${allowDelete}" th:action="@{/books/{bookId}/delete(bookId=${book.id})}" method="POST">
+                	是否要删除当前图书？<input type="submit" class="btn btn-success" th:value="是">
+            	</form>
+	        </div>
+		</div>
+		</div>
+		</div> 
+    </body>
+</html>
